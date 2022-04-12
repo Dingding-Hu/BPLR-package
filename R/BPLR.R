@@ -34,12 +34,9 @@
 
 BPLR=function(x,y,method="Bernstein",nss=10^4,type=3) {
   #check for arguments
-  stopifnot("x,y do not have the same length"= (length(x)==length(y)))
   stopifnot("needs to use one of provided methods"= (method %in% c("Bernstein","Box-Cox","ECDF","MLELR","Kernel","MSLELR")))
   stopifnot("too many points chosen"= (nss<=10^6))
   stopifnot("type should be 1, 2, 3 or 4 "= (type %in% 1:4))
-
-
 
   disroc=function(s,hatF0,hatF1)
   {
