@@ -3,6 +3,14 @@ This package is developed to estimate the ROC curve and its summary statistics i
 # Table of Contents
 [Installation]
 
+[Functions]
+
+[Usage]
+
+[References]
+
+# Installation
+
 Install this package from Github with
 
 ```r
@@ -13,14 +21,6 @@ devtools::install_github("Dingding-Hu/BPLR-package")
 library(BPLR)
 ```
 
-
-[Functions]
-
-[Usage]
-
-[References]
-
-# Installation
 
 # Functions
 
