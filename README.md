@@ -3,3 +3,10 @@ This package is developed to estimate the ROC curve and its summary statistics i
 # Table of Contents
 [Installation]
 # Installation
+
+
+
+
+
+
+[Installation]: <https://github.com/Dingding-Hu/BPLR-package/blob/main/README.md#installation>
