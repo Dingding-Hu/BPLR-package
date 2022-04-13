@@ -30,6 +30,28 @@ This package contains the following functions:
 
 # Usage
 
+We provide two examples.
+
+- Example 1: estimating the ROC curve and its summary statistics using the default "Bernstein" approach
+
+```r
+library(BPLR)
+# generate observed data
+x=rnorm(100,10,1)
+y=rnorm(200,11.75,1)
+# output the estimated ROC curve, Youden index, cutoff point and AUC in a list
+BPLR(x,y)
+```
+
+- Example 2: estimating the ROC curve and its summary statistics using an empirical CDF based approach:
+
+```r
+BPLR(x,y,method="ECDF")
+```
+
+
+
+
 # References
 
 
