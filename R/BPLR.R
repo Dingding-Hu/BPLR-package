@@ -35,7 +35,7 @@ BPLR=function(x,y,method="Bernstein",nss=10^4,type=2) {
   #check for arguments
   stopifnot("needs to use one of provided methods"= (method %in% c("Bernstein","Box-Cox","ECDF","MLELR","Kernel","MSLELR")))
   stopifnot("too many points chosen"= (nss<=10^6))
-  stopifnot("type should be 1, 2, 3 or 4 "= (type %in% 1:4))
+  stopifnot("type should be 1 or 2 "= (type %in% 1:2))
 
   disroc=function(s,hatF0,hatF1)
   {
