@@ -13,9 +13,8 @@
 #'        likelihood ratio ordering.
 #'
 #' @param type control the type of Bernstein polynomials used to approximate the log density ratio.
-#'        "type=1" uses the Bernstein polynomial of x and y. "type=2" uses the Bernstein polynomial of log(x) and log(y).
-#'        "type=3" uses both Bernstein polynomial of x, y and log(x), log(y).
-#'        "type=4" automatically choose between type=1 and 2.
+#'        "type=1" uses the Bernstein polynomial of x and y.
+#'        "type=2" uses both Bernstein polynomial of x, y and log(x), log(y).
 #'         In each case, the order of the Bernstein polynomials being used is selected by a BIC criteria.
 #' @param nss control the number of point estimates of the ROC curve in the range [0,1], default is 10^4.
 #'
@@ -32,7 +31,7 @@
 
 
 
-BPLR=function(x,y,method="Bernstein",nss=10^4,type=3) {
+BPLR=function(x,y,method="Bernstein",nss=10^4,type=2) {
   #check for arguments
   stopifnot("needs to use one of provided methods"= (method %in% c("Bernstein","Box-Cox","ECDF","MLELR","Kernel","MSLELR")))
   stopifnot("too many points chosen"= (nss<=10^6))
@@ -387,11 +386,6 @@ BPLR=function(x,y,method="Bernstein",nss=10^4,type=3) {
 
     if(type==2)
     {
-      xmat=tlgmat[,-1]
-    }
-
-    if(type==3)
-    {
       xmat=cbind(trtmat[,-1],tlgmat[,-1])
     }
 
@@ -455,11 +449,6 @@ BPLR=function(x,y,method="Bernstein",nss=10^4,type=3) {
 
     if(type==2)
     {
-      xmat=tlgmat[,-1]
-    }
-
-    if(type==3)
-    {
       xmat=cbind(trtmat[,-1],tlgmat[,-1])
     }
 
@@ -498,24 +487,8 @@ BPLR=function(x,y,method="Bernstein",nss=10^4,type=3) {
 
     }
 
+
     if(type==2)
-    {
-      cutobj=function(x)
-      {
-
-        estbeta=Bmat%*%(out$estb)
-
-        logsx=(log(x)-log(min(tt)) )/(log(max(tt))- log(min(tt)) )
-
-        part2=BernPoly(logsx,K)%*%estbeta
-
-        part2-log( lam/(1-lam) )
-      }
-
-    }
-
-
-    if(type==3)
     {
 
       cutobj=function(x)
@@ -559,19 +532,11 @@ BPLR=function(x,y,method="Bernstein",nss=10^4,type=3) {
   {
     out1=BPLR(x,y,type=1,nss=nss)
     out2=BPLR(x,y,type=2,nss=nss)
-    out3=BPLR(x,y,type=3,nss=nss)
-    out4=out1
-    if(out1$BIC>out2$BIC) { out4=out2 }
     if(type==1){
       out1
     } else if(type==2){
       out2
-    } else if(type==3){
-      out3
-    } else if(type==4){
-      out4
     }
-
   }
 
 
