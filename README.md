@@ -53,7 +53,8 @@ BPLR(x,y,method="ECDF")
 
 
 # References
-
+arXiv:2205.00505, 
+https://doi.org/10.48550/arXiv.2205.00505
 
 
 [Installation]: <https://github.com/Dingding-Hu/BPLR-package/blob/main/README.md#installation>
