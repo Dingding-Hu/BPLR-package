@@ -11,11 +11,7 @@
 #' @param method the method to be used to estimate ROC curve and its summary statistics.
 #'        The default method "Bernstein" uses the Bernstein polynomials to approximate the log of density ratio incorporating the
 #'        likelihood ratio ordering.
-#'
-#' @param type control the type of Bernstein polynomials used to approximate the log density ratio.
-#'        "type=1" uses the Bernstein polynomial of x and y.
-#'        "type=2" uses both Bernstein polynomial of x, y and log(x), log(y).
-#'         In each case, the order of the Bernstein polynomials being used is selected by a BIC criteria.
+#'        In each case, the order of the Bernstein polynomials being used is selected by a BIC criteria.
 #' @param nss control the number of point estimates of the ROC curve in the range [0,1], default is 10^4.
 #'
 #' @details The function
@@ -23,7 +19,7 @@
 #'
 #' @examples x=rnorm(100,10,1)
 #' y=rnrom(100,12,1)
-#' BPLR(x,y,method="Bernstein",nss=10^4,type=1)
+#' BPLR(x,y,method="Bernstein",nss=10^4)
 #'
 #' @import glmnet fdrtool rootSolve
 #'
@@ -31,11 +27,10 @@
 
 
 
-BPLR=function(x,y,method="Bernstein",nss=10^4,type=2) {
+BPLR=function(x,y,method="Bernstein",nss=10^4) {
   #check for arguments
   stopifnot("needs to use one of provided methods"= (method %in% c("Bernstein","Box-Cox","ECDF","MLELR","Kernel","MSLELR")))
   stopifnot("too many points chosen"= (nss<=10^6))
-  stopifnot("type should be 1 or 2 "= (type %in% 1:2))
 
   disroc=function(s,hatF0,hatF1)
   {
@@ -283,6 +278,7 @@ BPLR=function(x,y,method="Bernstein",nss=10^4,type=2) {
     ss=((1:nss)-0.5)/nss
     ROC=as.numeric(sapply(ss,disroc,hatF0=estF0,hatF1=estF1))
     AUC=mean(ROC)
+
     hatdif=abs(lcmfit$slope.knots-lam)
 
     len=length(hatdif)
@@ -292,7 +288,7 @@ BPLR=function(x,y,method="Bernstein",nss=10^4,type=2) {
     hatW=lcmfit$x.knots[ind]
     hatF1=lcmfit$y.knots[ind]/lam
     hatJ=(hatW-hatF1)/(1-lam)
-    indC=(1:nss)[estW==hatW]
+    indC=(1:length(tt))[estW==hatW]
     hatC=mean(tt[indC])
 
     list(ROC=ROC,AUC=AUC,Youden=hatJ,cutoff=hatC)
@@ -314,42 +310,32 @@ BPLR=function(x,y,method="Bernstein",nss=10^4,type=2) {
   {
 
     xmat=as.matrix(xmat)
-    K=ncol(xmat)
-    if(K==1)
-    {
-      out=suppressWarnings(glm(group~xmat,family="binomial"))
-      if(out$coef[2]<0)
-      {
-        out=glm(group~1,family="binomial")
-        hatp1=out$fitted.values
-        hatp0=1-hatp1
-        estb=as.numeric(c(out$coef,0))
-        df=0
-      }
-      else
-      {
-        hatp1=out$fitted.values
-        hatp0=1-hatp1
-        estb=as.numeric(out$coef)
-        df=1
-      }
-    }
+    out=glmnet(xmat,group,family="binomial",lambda=0,lower.limits=0,standardize =FALSE)
+    estb=as.numeric(c(as.numeric(out$a0),as.numeric(out$beta) ))
 
-    else
-    {
-      out=glmnet(xmat,group,family="binomial",lambda=0,lower.limits=0,standardize=F)
-      estb=as.numeric(c(as.numeric(out$a0),as.numeric(out$beta) ))
-
-      hatp1=predict(out,newx=xmat,type="response")
-      hatp0=1-hatp1
-      df=out$df
-    }
+    hatp1=predict(out,newx=xmat,type="response")
+    hatp0=1-hatp1
+    df=out$df
 
     list(hatp0=hatp0,hatp1=hatp1,estb=estb,df=df)
   }
 
 
-  ICBP=function(x,y,K,type=1)
+  glmplus2=function(group,xmat)
+  {
+
+    xmat=as.matrix(xmat)
+    out=glmnet(xmat,group,family="binomial",alpha = 0, lambda = 1e-06,standardize =FALSE)
+    estb=as.numeric(c(as.numeric(out$a0),as.numeric(out$beta) ))
+
+    hatp1=predict(out,newx=xmat,type="response")
+    hatp0=1-hatp1
+    df=out$df
+
+    list(hatp0=hatp0,hatp1=hatp1,estb=estb,df=df)
+  }
+
+  ICBP=function(x,y,K)
   {
     n0=length(x)
     n1=length(y)
@@ -378,19 +364,9 @@ BPLR=function(x,y,method="Bernstein",nss=10^4,type=2) {
 
     trtmat=tmat%*%Bmat
     tlgmat=logtmat%*%Bmat
+    xmat=cbind(trtmat[,-1],tlgmat[,-1])
 
-    if(type==1)
-    {
-      xmat=trtmat[,-1]
-    }
-
-    if(type==2)
-    {
-      xmat=cbind(trtmat[,-1],tlgmat[,-1])
-    }
-
-
-    out=glmplus(group,xmat)
+    out=glmplus2(group,xmat)
 
     hatp1=out$hatp1
     hatp0=1-hatp1
@@ -403,7 +379,7 @@ BPLR=function(x,y,method="Bernstein",nss=10^4,type=2) {
     c(lik,bic)
   }
 
-  BPLR=function(x,y,type=1,nss=10^4)
+  BPLR=function(x,y,nss=10^4)
   {
     n0=length(x)
     n1=length(y)
@@ -411,13 +387,13 @@ BPLR=function(x,y,method="Bernstein",nss=10^4,type=2) {
     group=c(rep(0,n0),rep(1,n1))
 
     output=c()
-    for(i in 1:15)
+    for(i in 1:5)
     {
-      output=rbind(output,ICBP(x,y,i,type=type))
+      output=rbind(output,ICBP(x,y,i))
     }
 
     IC=min(output[,2])
-    K=(1:15)[output[,2]<=IC][1]
+    K=(1:5)[output[,2]<=IC][1]
 
 
     ind=order(tt)
@@ -442,16 +418,7 @@ BPLR=function(x,y,method="Bernstein",nss=10^4,type=2) {
     trtmat=tmat%*%Bmat
     tlgmat=logtmat%*%Bmat
 
-    if(type==1)
-    {
-      xmat=trtmat[,-1]
-    }
-
-    if(type==2)
-    {
-      xmat=cbind(trtmat[,-1],tlgmat[,-1])
-    }
-
+    xmat=cbind(trtmat[,-1],tlgmat[,-1])
 
     out=glmplus(group,xmat)
 
@@ -463,68 +430,57 @@ BPLR=function(x,y,method="Bernstein",nss=10^4,type=2) {
       sum(prob[tt<=x])
     }
 
-    hatp1=hatp1/n1
-    hatp0=hatp0/n0
+    # hatp1=hatp1/n1
+    # hatp0=hatp0/n0
+    # ut=sort(unique(tt))
+    # estF0=sapply(ut,hatF,prob=hatp0)
+    # estF1=sapply(ut,hatF,prob=hatp1)
+    hatp1=hatp1/sum(hatp1)
+    hatp0=hatp0/sum(hatp0)
     ut=sort(unique(tt))
-    estF0=sapply(ut,hatF,prob=hatp0)
-    estF1=sapply(ut,hatF,prob=hatp1)
+    estF0=as.numeric(sapply(ut,hatF,prob=hatp0))
+    estF1=as.numeric(sapply(ut,hatF,prob=hatp1))
     ss=((1:nss)-0.5)/nss
     ROC=as.numeric(sapply(ss,disroc,hatF0=estF0,hatF1=estF1))
     AUC=mean(ROC)
 
-    if(type==1)
+    cutobj=function(x)
     {
-      cutobj=function(x)
-      {
+      estb=as.numeric( (out$estb)[-1])
+      estb1=estb[1:K]
+      estb2=estb[-(1:K)]
+      estb0=as.numeric(out$estb [1])
 
-        estbeta=Bmat%*%(out$estb)
+      nb1=c(estb0/2,estb1)
+      nb2=c(estb0/2,estb2)
+      estbeta1=Bmat%*%nb1
+      estbeta2=Bmat%*%nb2
 
-        sx=(x-min(tt))/(max(tt)-min(tt))
+      sx=(x-min(tt))/(max(tt)-min(tt))
+      logsx=(log(x)-log(min(tt)) )/(log(max(tt))- log(min(tt)) )
 
-        part1=BernPoly(sx,K)%*%estbeta
-        part1-log( lam/(1-lam) )
-      }
-
+      part1=BernPoly(sx,K)%*%estbeta1
+      part2=BernPoly(logsx,K)%*%estbeta2
+      part1+part2-log( lam/(1-lam) )
     }
 
+    # hatJ=max( estF0-estF1)
+    # ind=(1:length(ut))[(estF0-estF1)>=hatJ][1]
+    # low=ut[ind]
+    # upp=ifelse(ind<length(ut),ut[ind+1],max(ut))
+    # hatC=uniroot(cutobj,lower=low,upper=upp)$root
 
-    if(type==2)
-    {
-
-      cutobj=function(x)
-      {
-        estb=as.numeric( (out$estb)[-1])
-        estb1=estb[1:K]
-        estb2=estb[-(1:K)]
-        estb0=as.numeric(out$estb [1])
-
-        nb1=c(estb0/2,estb1)
-        nb2=c(estb0/2,estb2)
-        estbeta1=Bmat%*%nb1
-        estbeta2=Bmat%*%nb2
-
-        sx=(x-min(tt))/(max(tt)-min(tt))
-        logsx=(log(x)-log(min(tt)) )/(log(max(tt))- log(min(tt)) )
-
-        part1=BernPoly(sx,K)%*%estbeta1
-        part2=BernPoly(logsx,K)%*%estbeta2
-        part1+part2-log( lam/(1-lam) )
-      }
-
-    }
-
-    out=uniroot.all(cutobj,lower=min(tt),upper=max(tt))
-
-    hatJ0=as.numeric( sapply(out,hatF,prob=hatp0) )
-    hatJ1=as.numeric( sapply(out,hatF,prob=hatp1) )
+    outroot=uniroot.all(cutobj,lower=min(tt),upper=max(tt))
+    hatJ0=as.numeric( sapply(outroot,hatF,prob=hatp0) )
+    hatJ1=as.numeric( sapply(outroot,hatF,prob=hatp1) )
 
 
     hatJ=max( hatJ0-hatJ1 )
 
-    hatC=mean(out[ hatJ0-hatJ1 >=hatJ])
+    hatC=mean(outroot[ (hatJ0-hatJ1) >=hatJ])
 
 
-    list(ROC=ROC,AUC=AUC,Youden=hatJ,cutoff=hatC,BIC=IC)
+    list(ROC=ROC,AUC=AUC,Youden=hatJ,cutoff=hatC,N=K)
 
   }
 
@@ -603,7 +559,7 @@ BPLR=function(x,y,method="Bernstein",nss=10^4,type=2) {
     list(ROC=ROC,AUC=AUC,Youden=hatJ,cutoff=hatC)
   }
   if( method=="Bernstein"){
-    estbp(x,y,nss=nss,type=type)
+    estbp(x,y,nss=nss)
   } else if( method=="Box-Cox"){
     estbc(x,y,nss=nss)
   } else if(method=="ECDF") {
