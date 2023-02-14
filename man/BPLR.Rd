@@ -4,7 +4,7 @@
 \alias{BPLR}
 \title{Estimating the ROC curve}
 \usage{
-BPLR(x, y, method = "Bernstein", nss = 10^4, type = 3)
+BPLR(x, y, method = "Bernstein", nss = 10^4)
 }
 \arguments{
 \item{x}{vector contains the sample of biomarkers from the "healthy" group}
@@ -13,15 +13,10 @@ BPLR(x, y, method = "Bernstein", nss = 10^4, type = 3)
 
 \item{method}{the method to be used to estimate ROC curve and its summary statistics.
 The default method "Bernstein" uses the Bernstein polynomials to approximate the log of density ratio incorporating the
-likelihood ratio ordering.}
+likelihood ratio ordering.
+In each case, the order of the Bernstein polynomials being used is selected by a BIC criteria.}
 
 \item{nss}{control the number of point estimates of the ROC curve in the range [0,1], default is 10^4.}
-
-\item{type}{control the type of Bernstein polynomials used to approximate the log density ratio.
-"type=1" uses the Bernstein polynomial of x and y. "type=2" uses the Bernstein polynomial of log(x) and log(y).
-"type=3" uses both Bernstein polynomial of x, y and log(x), log(y).
-"type=4" automatically choose between type=1 and 2.
- In each case, the order of the Bernstein polynomials being used is selected by a BIC criteria.}
 }
 \description{
 To estimate ROC curve and its summary statistics including AUC, Youden index and cutoff point based on a single biomarker.
@@ -34,6 +29,6 @@ The function
 \examples{
 x=rnorm(100,10,1)
 y=rnrom(100,12,1)
-BPLR(x,y,method="Bernstein",nss=10^4,type=1)
+BPLR(x,y,method="Bernstein",nss=10^4)
 
 }
