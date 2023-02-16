@@ -48,44 +48,44 @@ x=CK[data$Status..0....normal..1...carries.==0]
 y=CK[data$Status..0....normal..1...carries.==1]
 
 # output the estimated ROC curve, AUC, Youden index and optimal cutoff point in a list
-BPLR(x,y,method="BP")
+ROC(x,y,method="BP")
 ```
 
 - Other methods can be implemented as follows:
 
 (1) The Box-Cox method in Bantis et al. (2019)
 ```r
-BPLR(x,y,method="Box-Cox")
+ROC(x,y,method="Box-Cox")
 ```
 
 (2) The ZL method in Zhou and Lin (2008)
 ```r
-BPLR(x,y,method="ZL")
+ROC(x,y,method="ZL")
 ```
 
 (3) The LZL method in Lin et al. (2012)
 ```r
-BPLR(x,y,method="LZL")
+ROC(x,y,method="LZL")
 ```
 
 (4) The ECDF method
 ```r
-BPLR(x,y,method="ECDF")
+ROC(x,y,method="ECDF")
 ```
 
 (5) The MNLE method in Dykstra et al. (1995)
 ```r
-BPLR(x,y,method="MNLE")
+ROC(x,y,method="MNLE")
 ```
 
 (6) The Kernel method in Bantis et al. (2019)
 ```r
-BPLR(x,y,method="Kernel")
+ROC(x,y,method="Kernel")
 ```
 
 (7) The MSLE method in Yu et al. (2017)
 ```r
-BPLR(x,y,method="MSLE")
+ROC(x,y,method="MSLE")
 ```
 
 # References
