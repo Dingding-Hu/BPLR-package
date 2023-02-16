@@ -51,7 +51,7 @@ BPLR(x,y,method="BP")
 
 - Other approaches are also available:
 
-- The Box-cox method in 
+(1) The Box-cox method in Bantis et al.(2009)
 ```r
 BPLR(x,y,method="Box-Cox")
 ```
