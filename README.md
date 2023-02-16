@@ -49,7 +49,7 @@ y=CK[data1$Status..0....normal..1...carries.==1]
 BPLR(x,y,method="BP")
 ```
 
-- Other approaches are also available:
+- Other methods are also available:
 
 (1) The Box-cox method in Bantis et al.(2019)
 ```r
@@ -87,8 +87,9 @@ BPLR(x,y,method="MSLE")
 ```
 
 # References
-arXiv:2205.00505, 
-https://doi.org/10.48550/arXiv.2205.00505.
+D. Hu, M. Yuan, T. Yu, and P. Li (2022+), Statistical inference for the two-sample problem under
+likelihood ratio ordering, with application to the ROC curve estimation. 
+
 
 
 [Installation]: <https://github.com/Dingding-Hu/BPLR-package/blob/main/README.md#installation>
