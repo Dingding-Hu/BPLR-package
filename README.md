@@ -31,7 +31,7 @@ This package contains the following functions:
 
 # Usage
 
-The function `BPLR` inputs the biomarkers from the diseased (`y`) and non-diseased group (`x`), and outputs a list consists of the ROC curve, AUC, Youden index and optimal cutoff point estimation. Here, we provide the code for the real data application in Hu et al.(2022+). The csv file of the DMD data is provided in the R folder of this package.
+The function `BPLR` inputs the biomarkers from the non-diseased group (`x`) and the diseased group (`y`) , and outputs a list consisting of the ROC curve, AUC, Youden index, and optimal cutoff point estimation. In the following, we provide the code for the real data application in Hu et al. (2022). The csv file of the DMD data is provided in the R folder of this package.
 
 - Example: estimating the ROC curve and its summary statistics using the default "BPLR" approach
 
