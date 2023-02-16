@@ -1,5 +1,5 @@
 # R package BPLR
-This package is developed for the proposed Bernstein polynomial (BP) method in Hu et al. (2022) to estimate the ROC curve and its summary statistics including the AUC, Youden index, and optimal cutoff point based on a single biomarker under likelihood ratio ordering. The default BP approach deals with the case that the density ratio of two groups (diseased/non-diseased) of biomarkers is monotonically increasing. The code for other competitive method in  Hu et al. (2022) are also included. Details are provided below.
+This package is developed for the proposed Bernstein polynomial (BP) method in Hu et al. (2022) to estimate the ROC curve and its summary statistics including the AUC, Youden index, and optimal cutoff point based on a single biomarker under likelihood ratio ordering. The default BP approach deals with the case that the density ratio of two groups (diseased/non-diseased) of biomarkers is monotonically increasing. The code for other competitive methods in  Hu et al. (2022) are also included. 
 
 # Table of Contents
 [Installation]
@@ -16,7 +16,7 @@ Install this package from Github with
 
 ```r
 # Install package "devtool" first if hasn't
-#install.packages("devtools")
+# install.packages("devtools")
 library(devtools)
 devtools::install_github("Dingding-Hu/BPLR-package")
 library(BPLR)
