@@ -90,8 +90,22 @@ BPLR(x,y,method="MSLE")
 D. Hu, M. Yuan, T. Yu, and P. Li (2022+), Statistical inference for the two-sample problem under
 likelihood ratio ordering, with application to the ROC curve estimation. 
 
+Dykstra R, Kochar S, Robertson T. Inference for likelihood ratio ordering in the two-sample problem. Journal of the
+American Statistical Association 1995; 90: 1034-1040.
+
 Bantis LE, Nakas CT, Reiser B. Construction of confidence intervals for the maximum of the Youden index and the
 corresponding cutoff point of a continuous biomarker. Biometrical Journal 2019; 61: 138-156.
+
+Yu T, Li P, Qin J. Density estimation in the two-sample problem with likelihood ratio ordering. Biometrika 2017; 104:
+141-152.
+
+Zhou XH, Lin H. Semi-parametric maximum likelihood estimates for ROC curves of continuous-scale tests. Statistics in
+Medicine 2008; 27: 5271-5290.
+
+Lin H, Zhou XH, Li G. A direct semiparametric receiver operating characteristic curve regression with unknown link and
+baseline functions. Statistica Sinica 2012; 22: 1427-1456.
+
+Zhou X, McClish DK, Obuchowski NA. Statistical Methods in Diagnostic Medicine. New York: Wiley. second ed. 2011.
 
 [Installation]: <https://github.com/Dingding-Hu/BPLR-package/blob/main/README.md#installation>
 [Functions]: <https://github.com/Dingding-Hu/BPLR-package/blob/main/README.md#functions>
