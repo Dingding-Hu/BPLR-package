@@ -1,5 +1,5 @@
 # R package BPLR
-This package is developed for the proposed method in Hu et al. to estimate the ROC curve and its summary statistics including AUC, Youden index and cutoff point based on a single biomarker. The default Bernstein polynomial approach deals with the case that the density ratio of two groups of biomarkers is monotone (diseased/non-diseased). The codes for other approaches in the simulation of Hu et al. are also provided. Details are provided below.
+This package is developed for the proposed method in Hu et al.(2022+) to estimate the ROC curve and its summary statistics including AUC, Youden index and cutoff point based on a single biomarker. The default Bernstein polynomial approach deals with the case that the density ratio of two groups of biomarkers is monotone (diseased/non-diseased). The codes for other approaches in the simulation of Hu et al.(2022+) are also provided. Details are provided below.
 
 # Table of Contents
 [Installation]
