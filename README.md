@@ -44,10 +44,10 @@ data=read.csv("DMD_CK.csv")
 CK=data$CK
 
 # separate diseased and non-diseased biomarkers
-x=CK[data1$Status..0....normal..1...carries.==0]
-y=CK[data1$Status..0....normal..1...carries.==1]
+x=CK[data$Status..0....normal..1...carries.==0]
+y=CK[data$Status..0....normal..1...carries.==1]
 
-# output the estimated ROC curve, Youden index, cutoff point and AUC in a list
+# output the estimated ROC curve, AUC, Youden index and optimal cutoff point in a list
 BPLR(x,y,method="BP")
 ```
 
