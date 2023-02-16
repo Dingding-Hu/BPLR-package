@@ -53,37 +53,37 @@ BPLR(x,y,method="BP")
 
 - Other methods can be implemented as follows:
 
-(1) The Box-Cox method in Bantis et al.(2019)
+(1) The Box-Cox method in Bantis et al. (2019)
 ```r
 BPLR(x,y,method="Box-Cox")
 ```
 
-(2) The ZL method in Zhou and Lin(2008)
+(2) The ZL method in Zhou and Lin (2008)
 ```r
 BPLR(x,y,method="ZL")
 ```
 
-(3) The ECDF method in Zhou et al.(2011)
-```r
-BPLR(x,y,method="ECDF")
-```
-
-(4) The MNLE method in Dykstra et al.(1995)
-```r
-BPLR(x,y,method="MNLE")
-```
-
-(5) The LZL method in Lin et al.(2012)
+(3) The LZL method in Lin et al. (2012)
 ```r
 BPLR(x,y,method="LZL")
 ```
 
-(6) The Kernel method in Bantis et al.(2019)
+(4) The ECDF method
+```r
+BPLR(x,y,method="ECDF")
+```
+
+(5) The MNLE method in Dykstra et al. (1995)
+```r
+BPLR(x,y,method="MNLE")
+```
+
+(6) The Kernel method in Bantis et al. (2019)
 ```r
 BPLR(x,y,method="Kernel")
 ```
 
-(6) The MSLE method in Yu et al.(2017)
+(7) The MSLE method in Yu et al. (2017)
 ```r
 BPLR(x,y,method="MSLE")
 ```
