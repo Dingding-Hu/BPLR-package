@@ -107,7 +107,6 @@ Medicine 2008; 27: 5271-5290.
 Lin H, Zhou XH, Li G. A direct semiparametric receiver operating characteristic curve regression with unknown link and
 baseline functions. Statistica Sinica 2012; 22: 1427-1456.
 
-Zhou X, McClish DK, Obuchowski NA. Statistical Methods in Diagnostic Medicine. New York: Wiley. second ed. 2011.
 
 [Installation]: <https://github.com/Dingding-Hu/BPLR-package/blob/main/README.md#installation>
 [Functions]: <https://github.com/Dingding-Hu/BPLR-package/blob/main/README.md#functions>
