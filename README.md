@@ -27,7 +27,7 @@ library(BPLR)
 
 This package contains the following functions:
 
-- `BPLR`: An approximation of the ROC curve and point estimate of the Youden index, cutoff point and AUC using different methods (by changing the argument `method`)
+- `BPLR`: Return the estimates of the ROC curve, AUC, Youden index, and optimal cutoff point using different methods (by changing the argument `method`)
 
 # Usage
 
