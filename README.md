@@ -49,10 +49,11 @@ y=CK[data1$Status..0....normal..1...carries.==1]
 BPLR(x,y,method="BP")
 ```
 
-- Example 2: estimating the ROC curve and its summary statistics using an empirical CDF based approach:
+- Other approaches are also available:
 
+- The Box-cox method in 
 ```r
-BPLR(x,y,method="ECDF")
+BPLR(x,y,method="Box-Cox")
 ```
 
 
