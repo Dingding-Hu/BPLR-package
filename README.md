@@ -39,9 +39,11 @@ The function `BPLR` inputs the biomarkers from the diseased (`y`) and non-diseas
 library(BPLR)
 # read in the data from the csv file
 data=read.csv("DMD_CK.csv")
-# separate diseased and non-diseased biomarkers
-CK=data1$CK
 
+# store biomarker CK
+CK=data$CK
+
+# separate diseased and non-diseased biomarkers
 x=CK[data1$Status..0....normal..1...carries.==0]
 y=CK[data1$Status..0....normal..1...carries.==1]
 
