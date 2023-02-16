@@ -27,13 +27,13 @@ library(BPLR)
 
 This package contains the following functions:
 
-- An approximation of the ROC curve and point estimate of the Youden index, cutoff point and AUC (`BPLR`) using different methods (by changing argument `method`)
+- `BPLR`: An approximation of the ROC curve and point estimate of the Youden index, cutoff point and AUC using different methods (by changing the argument `method`)
 
 # Usage
 
-We provide two examples.
+The function `BPLR` inputs the biomarkers from the diseased (`y`) and non-diseased group (`x`), and outputs a list consists of the ROC curve, AUC, Youden index and optimal cutoff point estimation. Here, we provide the code for the real data application in Hu et al.(2022+). The csv file of the data is provided in the R folder of this package.
 
-- Example 1: estimating the ROC curve and its summary statistics using the default "Bernstein" approach
+- Example: estimating the ROC curve and its summary statistics using the default "BPLR" approach
 
 ```r
 library(BPLR)
