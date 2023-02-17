@@ -89,14 +89,18 @@ ROC(x,y,method="MSLE")
 ```
 
 # References
-Hu D, Yuan M, Yu T, Li P (2022), "Statistical inference for the two-sample problem under
-likelihood ratio ordering, with application to the ROC curve estimation", [arXiv:2205.00505](http://arxiv.org/abs/2205.00505).
+
+Bantis LE, Nakas CT, Reiser B (2019), "Construction of confidence intervals for the maximum of the Youden index and the
+corresponding cutoff point of a continuous biomarker", Biometrical Journal, 61, 138-156.
 
 Dykstra R, Kochar S, Robertson T (1995), "Inference for likelihood ratio ordering in the two-sample problem", Journal of the
 American Statistical Association, 90, 1034-1040.
 
-Bantis LE, Nakas CT, Reiser B (2019), "Construction of confidence intervals for the maximum of the Youden index and the
-corresponding cutoff point of a continuous biomarker", Biometrical Journal, 61, 138-156.
+Hu D, Yuan M, Yu T, Li P (2022), "Statistical inference for the two-sample problem under
+likelihood ratio ordering, with application to the ROC curve estimation", [arXiv:2205.00505](http://arxiv.org/abs/2205.00505).
+
+Lin H, Zhou XH, Li G (2012), "A direct semiparametric receiver operating characteristic curve regression with unknown link and
+baseline functions", Statistica Sinica, 22, 1427-1456.
 
 Yu T, Li P, Qin J (2017), "Density estimation in the two-sample problem with likelihood ratio ordering", Biometrika, 104,
 141-152.
@@ -104,8 +108,7 @@ Yu T, Li P, Qin J (2017), "Density estimation in the two-sample problem with lik
 Zhou XH, Lin H (2008), "Semi-parametric maximum likelihood estimates for ROC curves of continuous-scale tests", Statistics in
 Medicine, 27, 5271-5290.
 
-Lin H, Zhou XH, Li G (2012), "A direct semiparametric receiver operating characteristic curve regression with unknown link and
-baseline functions", Statistica Sinica, 22, 1427-1456.
+
 
 
 [Installation]: <https://github.com/Dingding-Hu/BPLR-package/blob/main/README.md#installation>
