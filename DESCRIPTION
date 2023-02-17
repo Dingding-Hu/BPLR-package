@@ -1,6 +1,6 @@
 Package: BPLR
 Type: Package
-Title: What the Package Does (Title Case)
+Title: ROC curve analysis
 Version: 0.1.0
 Author: Dingding Hu
 Maintainer: The package maintainer <yourself@somewhere.net>
