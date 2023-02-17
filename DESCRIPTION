@@ -4,8 +4,7 @@ Title: ROC curve analysis
 Version: 0.1.0
 Author: Dingding Hu
 Maintainer: The package maintainer <d32hu@uwaterloo.ca>
-Description: This package is developed for the proposed Bernstein polynomial (BP) method in Hu et al. (2022) to estimate the ROC curve and its summary statistics including the AUC, Youden index, and optimal cutoff point based on a single biomarker under likelihood ratio ordering. 
-The default BP approach deals with the case that the density ratio of two groups (diseased/non-diseased) of biomarkers is monotonically increasing. The code for other competitive methods in Hu et al. (2022) are also included.
+Description: This package is developed for the proposed Bernstein polynomial (BP) method in Hu et al. (2022) to estimate the ROC curve and its summary statistics including the AUC, Youden index, and optimal cutoff point based on a single biomarker under likelihood ratio ordering. The default BP approach deals with the case that the density ratio of two groups (diseased/non-diseased) of biomarkers is monotonically increasing. The code for other competitive methods in Hu et al. (2022) are also included.
 License: GPL-3
 Imports: glmnet, fdrtool, rootSolve
 Encoding: UTF-8
