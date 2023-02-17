@@ -315,6 +315,43 @@ estbc=function(x,y,nss=10^4)
 
 ############################## Zhou XH, Lin H, 2008 (ZL)
 
+
+
+datafreq1=function(x,y)
+{
+  Tvalue=c(x,y)
+  group=c(rep(0,length(x)),rep(1,length(y)))
+
+  tt=sort(unique(Tvalue))
+  slr=tt
+  skr=tt
+  for(i in 1:length(tt))
+  {
+    slr[i]=sum((Tvalue==tt[i])&(group==1))
+    skr[i]=sum((Tvalue==tt[i])&(group==0))
+  }
+
+  sd=as.numeric(skr>0)+as.numeric((skr>0)&(slr>0))
+  dsd=diff(sd)
+  ind=c( ((dsd==0)&(sd[-1]<=1)),FALSE)
+
+  fy=c(min(tt)-1,tt[!ind])
+
+  ni=length(fy)-1
+
+  kr=rep(0,ni)
+  lr=rep(0,ni)
+
+  for(i in 1:ni)
+  {
+    kr[i]=sum((x>fy[i])&(x<=fy[i+1]))
+    lr[i]=sum((y>fy[i])&(y<=fy[i+1]))
+  }
+
+  cbind(kr,lr)
+}
+
+
 loglik=function(x,y,alp,cvec)
 {
   alp0=alp[1]
@@ -322,7 +359,7 @@ loglik=function(x,y,alp,cvec)
   cvec1=c(-1000,cvec)
   cvec2=c(cvec,1000)
 
-  out=datafreq(x,y)
+  out=datafreq1(x,y)
   kr=out[,1]
   lr=out[,2]
 
@@ -335,7 +372,7 @@ loglik=function(x,y,alp,cvec)
 loglik2=function(x,y,theta)
 {
 
-  out=datafreq(x,y)
+  out=datafreq1(x,y)
   kr=out[,1]
   lr=out[,2]
 
@@ -388,7 +425,7 @@ maxite=function(x,y,theta)
 
 newmax=function(x,y,theta)
 {
-  ni=nrow(datafreq(x,y))
+  ni=nrow(datafreq1(x,y))
   ite=0
   out=maxite(x,y,theta)
   oldtheta=out$new
@@ -422,7 +459,7 @@ newmax=function(x,y,theta)
 mle3=function(x,y)
 {
 
-  ni=nrow(datafreq(x,y))
+  ni=nrow(datafreq1(x,y))
   out=newmax(x,y,c(1,1,sort(runif(ni-1,-5,5)) ))
 
   newtheta=c(out$new[1:2],cumsum(out$new[-(1:2)]))
@@ -433,7 +470,7 @@ mle3=function(x,y)
 mle2=function(x,y)
 {
 
-  ni=nrow(datafreq(x,y))
+  ni=nrow(datafreq1(x,y))
   out=newmax(x,y,c(1,1,sort(runif(ni-1,-5,5)) ))
 
   newtheta=c(out$new[1:3],diff(out$new[-(1:2)]))
@@ -476,7 +513,7 @@ maxlik=function(x,y,theta)
 mle=function(x,y)
 {
 
-  ni=nrow(datafreq(x,y))
+  ni=nrow(datafreq1(x,y))
   out=maxlik(x,y,c(1,1,sort(runif(ni-1,-5,5)) ))
   newtheta=c(out$new[1:3],diff(out$new[-(1:2)]))
   output=optim(par=newtheta,fn=loglik2,
