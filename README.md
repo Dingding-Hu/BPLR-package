@@ -89,7 +89,7 @@ ROC(x,y,method="MSLE")
 ```
 
 # References
-D. Hu, M. Yuan, T. Yu, and P. Li (2022+), Statistical inference for the two-sample problem under
+Hu D, Yuan M, Yu T, Li P (2022), Statistical inference for the two-sample problem under
 likelihood ratio ordering, with application to the ROC curve estimation. 
 
 Dykstra R, Kochar S, Robertson T. Inference for likelihood ratio ordering in the two-sample problem. Journal of the
