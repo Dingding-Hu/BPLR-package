@@ -37,7 +37,8 @@ The function `ROC` inputs the biomarkers from the non-diseased group (`x`) and t
 
 ```r
 library(BPLR)
-# The csv file of the DMD data is provided in the R folder of this package. To import the data, one needs to download the csv file and put it in the working directory.
+# The csv file of the DMD data is provided in the R folder of this package. 
+# To import the data, one needs to download the csv file and put it in the working directory.
 data=read.csv("DMD_CK.csv")
 
 # store biomarker CK
