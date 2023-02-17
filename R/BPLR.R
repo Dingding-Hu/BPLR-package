@@ -1,5 +1,3 @@
-
-
 #' ROC curve analysis
 #'
 #' To estimate the ROC curve and its summary statistics including the AUC, Youden index, and optimal cutoff point based on a single biomarker by eight differet methods.
@@ -46,5 +44,3 @@ ROC=function(x,y,method="BP",nss=10^4) {
     estsmlr(x,y,nss=nss)
   }
 }
-
-
