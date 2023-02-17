@@ -537,7 +537,7 @@ estzl=function(x,y,nss=10^4)
   ROC=cbind(ss,pnorm(alp[1]+alp[2]*qnorm(ss)))
   auc=mean(pnorm(alp[1]+alp[2]*qnorm(ss)))
 
-  list(Youden=youden,cutoff=cutoff,AUC=auc,ROC=ROC)
+  list(ROC=ROC,AUC=auc,Youden=youden,cutoff=cutoff)
 }
 
 
