@@ -8,7 +8,7 @@
 #' @param method the method to estimate ROC curve and its summary statistics. It can be "BP","Box-Cox","ZL","ECDF","LZL","MNLE","Kernel",or "MSLE".
 #' @param nss control the number of point estimates of the ROC curve in the range [0,1], default is 10^4.
 #'
-#' @details The function
+#' @details The detail for each method is provided in Hu et al. (2022) or 
 #'
 #'
 #' @examples x=rnorm(100,10,1)
