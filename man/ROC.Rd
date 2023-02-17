@@ -20,7 +20,7 @@ To estimate the ROC curve and its summary statistics including the AUC, Youden i
 The default is the Bernstein polynomial approach in Hu et al. (2022), which is developed under the likelihood ratio ordering assumption.
 }
 \details{
-The function
+The detail for each method is provided in Hu et al. (2022) or https://github.com/Dingding-Hu/BPLR-package.
 }
 \examples{
 x=rnorm(100,10,1)
