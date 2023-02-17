@@ -11,6 +11,7 @@
 #' @details The detail for each method is provided in Hu et al. (2022) or https://github.com/Dingding-Hu/BPLR-package.
 #'
 #'
+#'
 #' @examples x=rnorm(100,10,1)
 #' y=rnrom(100,12,1)
 #' ROC(x,y,method="BP")
