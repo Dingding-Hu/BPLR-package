@@ -410,7 +410,6 @@ maxite=function(x,y,theta)
     }
     output=nlminb(start=cvec[i],pln1,lower=c(Extcvec[i]),upper=c(Extcvec[i+2]))
     cvec[i]=output$par
-    #print(output$objective)
   }
 
   pln2=function(alpha)
@@ -418,7 +417,6 @@ maxite=function(x,y,theta)
     loglik(x,y,alpha,cvec)
   }
   output=nlminb(alp,pln2,lower=c(-10,0),upper=c(10,10))
-  #print(output$objective)
   list(new=c(output$par,cvec),lik=output$objective)
 }
 
@@ -431,7 +429,6 @@ newmax=function(x,y,theta)
   oldtheta=out$new
   oldlik=out$lik
   err=1
-  #print(oldlik)
   newtheta=c(out$new[1:3],diff(out$new[-(1:2)]))
 
 
@@ -441,13 +438,9 @@ newmax=function(x,y,theta)
                  method="L-BFGS-B",x=x,y=y,lower=c(-10,0,-20,rep(0,ni-2)),
                  upper=c(10,10,rep(20,ni-1)),control=list(maxit=30))
     newtheta=output$par
-    # newtheta=c(output$par[1:2],cumsum(output$par[-c(1:2)]))
-    # out=maxite(x,y,newtheta)
-    # newtheta=out$new
     newlik=output$value
     err=abs(newlik-oldlik)
     oldlik=newlik
-    #print(oldlik)
     ite=ite+1
   }
   list(new=newtheta,lik=newlik,ite=ite)
@@ -467,23 +460,6 @@ mle3=function(x,y)
   list(alp=newtheta,cvec=newtheta[-c(1:2)])
 }
 
-mle2=function(x,y)
-{
-
-  ni=nrow(datafreq1(x,y))
-  out=newmax(x,y,c(1,1,sort(runif(ni-1,-5,5)) ))
-
-  newtheta=c(out$new[1:3],diff(out$new[-(1:2)]))
-  output=optim(par=newtheta,fn=loglik2,
-               method="L-BFGS-B",x=x,y=y,lower=c(-10,0,-20,rep(0,ni-2)),
-               upper=c(10,10,rep(20,ni-1)),control=list(maxit=0),hessian=TRUE)
-  newtheta=c(output$par[1:2],cumsum(output$par[-c(1:2)]))
-
-  hes=solve(output$hessian)[1:2,1:2]
-  se=sqrt(c(hes[1,1],hes[2,2]))
-
-  list(alp=newtheta,alpse=se,cvec=newtheta[-c(1:2)])
-}
 
 
 maxlik=function(x,y,theta)
@@ -507,24 +483,6 @@ maxlik=function(x,y,theta)
   out
 }
 
-
-
-
-mle=function(x,y)
-{
-
-  ni=nrow(datafreq1(x,y))
-  out=maxlik(x,y,c(1,1,sort(runif(ni-1,-5,5)) ))
-  newtheta=c(out$new[1:3],diff(out$new[-(1:2)]))
-  output=optim(par=newtheta,fn=loglik2,
-               method="L-BFGS-B",x=x,y=y,lower=c(-10,0,-20,rep(0,ni-2)),
-               upper=c(10,10,rep(20,ni-1)),control=list(maxit=2000),hessian=TRUE)
-
-  hes=solve(output$hessian)[1:2,1:2]
-  se=sqrt(c(hes[1,1],hes[2,2]))
-
-  list(alp=output$par[1:2],se=se)
-}
 
 
 
