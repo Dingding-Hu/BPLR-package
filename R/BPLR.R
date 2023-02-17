@@ -19,7 +19,7 @@
 #'
 #' @examples x=rnorm(100,10,1)
 #' y=rnrom(100,12,1)
-#' BPLR(x,y,method="Bernstein",nss=10^4)
+#' ROC(x,y,method="Bernstein",nss=10^4)
 #'
 #' @import glmnet fdrtool rootSolve
 #'
@@ -27,7 +27,7 @@
 
 
 
-BPLR=function(x,y,method="BP",nss=10^4) {
+ROC=function(x,y,method="BP",nss=10^4) {
   #check for arguments
   stopifnot("needs to use one of provided methods"= (method %in% c("BP","Box-Cox","ZL","ECDF","LZL","MNLE","Kernel","MSLE")))
   stopifnot("too many points chosen"= (nss<=10^6))

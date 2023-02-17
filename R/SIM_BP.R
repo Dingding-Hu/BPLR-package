@@ -222,7 +222,7 @@ estbp=function(x,y,nss=10^4)
   estF0=as.numeric(sapply(ut,hatF,prob=hatp0))
   estF1=as.numeric(sapply(ut,hatF,prob=hatp1))
   ss=((1:nss)-0.5)/nss
-  ROC=as.numeric(sapply(ss,disroc,hatF0=estF0,hatF1=estF1))
+  ROC=cbind(ss,as.numeric(sapply(ss,disroc,hatF0=estF0,hatF1=estF1)))
   pi=c(estF0[1],diff(estF0))
   qi=c(estF1[1],diff(estF1))
   AUC=sum((estF0-0.5*pi)*qi)
@@ -289,7 +289,7 @@ estbc=function(x,y,nss=10^4)
   my = mean(ty)
   sy = sqrt(mean((ty-my)^2))
   ss=((1:nss)-0.5)/nss
-  ROC=1-pnorm(qnorm(1-ss,mx,sx),my,sy)
+  ROC=cbind(ss,1-pnorm(qnorm(1-ss,mx,sx),my,sy))
   AUC=mean(ROC)
   difpdf=function(tt)
   {
@@ -568,7 +568,7 @@ estzl=function(x,y,nss=10^4)
   cutoff=tt[which.min(abs(uHat-hatc))]
 
   ss=((1:nss)-0.5)/nss
-  ROC=pnorm(alp[1]+alp[2]*qnorm(ss))
+  ROC=cbind(ss,pnorm(alp[1]+alp[2]*qnorm(ss)))
   auc=mean(pnorm(alp[1]+alp[2]*qnorm(ss)))
 
   list(Youden=youden,cutoff=cutoff,AUC=auc,ROC=ROC)
@@ -591,7 +591,7 @@ estemp= function(x,y,nss=10^4)
   estF1=hatF1(tt)
   ss=((1:nss)-0.5)/nss
 
-  ROC=as.numeric(sapply(ss,disroc,hatF0=estF0,hatF1=estF1))
+  ROC=cbind(ss,as.numeric(sapply(ss,disroc,hatF0=estF0,hatF1=estF1)))
   AUC=mean(ROC)
   n=length(tt)
 
@@ -633,7 +633,7 @@ estlr=function(x,y,nss=10^4)
   estF1=cumsum(hatp1)
 
   ss=((1:nss)-0.5)/nss
-  ROC=as.numeric(sapply(ss,disroc,hatF0=estF0,hatF1=estF1))
+  ROC=cbind(ss,as.numeric(sapply(ss,disroc,hatF0=estF0,hatF1=estF1)))
   AUC=mean(ROC)
   hatF1=cumsum(hatp1)
   hatF0=cumsum(hatp0)
@@ -664,7 +664,7 @@ estsinica=function(x,y,nss=10^4){
     1-mean(vec)
   }
   ss=((1:nss)-0.5)/nss
-  roc=sapply(ss,FUN = ROC)
+  roc=cbind(ss,sapply(ss,FUN = ROC))
   AUC=mean(roc)
   hatJ=max(roc-ss)
   hatU=mean(ss[(roc-ss)>=hatJ])
@@ -726,7 +726,7 @@ estsmlr=function(x,y,nss=10^4)
   estF1=outy/lam
   estF0=(uW-outy)/(1-lam)
   ss=((1:nss)-0.5)/nss
-  ROC=as.numeric(sapply(ss,disroc,hatF0=estF0,hatF1=estF1))
+  ROC=cbind(ss,as.numeric(sapply(ss,disroc,hatF0=estF0,hatF1=estF1)))
   AUC=mean(ROC)
 
   hatdif=abs(lcmfit$slope.knots-lam)
@@ -802,7 +802,7 @@ estkern= function(x,y,nss=10^4)
   estF1=kerncdf(tt,y,type="p")
 
   ss=((1:nss)-0.5)/nss
-  ROC=as.numeric(sapply(ss,disroc,hatF0=estF0,hatF1=estF1))
+  ROC=cbind(ss,as.numeric(sapply(ss,disroc,hatF0=estF0,hatF1=estF1)))
   AUC=mean(ROC)
   obj=function(tt)
   {
