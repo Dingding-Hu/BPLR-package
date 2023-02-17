@@ -447,8 +447,6 @@ newmax=function(x,y,theta)
 }
 
 
-
-
 mle3=function(x,y)
 {
 
@@ -459,31 +457,6 @@ mle3=function(x,y)
 
   list(alp=newtheta,cvec=newtheta[-c(1:2)])
 }
-
-
-
-maxlik=function(x,y,theta)
-{
-  ite=1
-  out=maxite(x,y,theta)
-  oldtheta=out$new
-  oldlik=out$lik
-  err=1
-  while(err>1e-4)
-  {
-    print(c(ite,oldlik,err))
-    out=maxite(x,y,oldtheta)
-    newtheta=out$new
-    newlik=out$lik
-    err=(oldlik-newlik)/newlik
-    oldtheta=newtheta
-    oldlik=newlik
-    ite=ite+1
-  }
-  out
-}
-
-
 
 
 estzl=function(x,y,nss=10^4)
@@ -556,8 +529,6 @@ estzl=function(x,y,nss=10^4)
   }
 
   opt.res=optimize(roc,c(0.001,0.999),maximum=T)
-  # cutoff=mean(tt[hatF0-hatF1>=max(hatF0-hatF1)])
-
   youden=opt.res$objective
   uHat=qnorm(1-opt.res$maximum)
   cutoff=tt[which.min(abs(uHat-hatc))]
