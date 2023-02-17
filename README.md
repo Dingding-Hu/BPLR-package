@@ -95,17 +95,17 @@ likelihood ratio ordering, with application to the ROC curve estimation", [arXiv
 Dykstra R, Kochar S, Robertson T (1995), "Inference for likelihood ratio ordering in the two-sample problem", Journal of the
 American Statistical Association, 90, 1034-1040.
 
-Bantis LE, Nakas CT, Reiser B. Construction of confidence intervals for the maximum of the Youden index and the
-corresponding cutoff point of a continuous biomarker. Biometrical Journal 2019; 61: 138-156.
+Bantis LE, Nakas CT, Reiser B (2019), "Construction of confidence intervals for the maximum of the Youden index and the
+corresponding cutoff point of a continuous biomarker", Biometrical Journal, 61, 138-156.
 
-Yu T, Li P, Qin J. Density estimation in the two-sample problem with likelihood ratio ordering. Biometrika 2017; 104:
+Yu T, Li P, Qin J (2017), "Density estimation in the two-sample problem with likelihood ratio ordering", Biometrika, 104,
 141-152.
 
-Zhou XH, Lin H. Semi-parametric maximum likelihood estimates for ROC curves of continuous-scale tests. Statistics in
-Medicine 2008; 27: 5271-5290.
+Zhou XH, Lin H (2008), "Semi-parametric maximum likelihood estimates for ROC curves of continuous-scale tests", Statistics in
+Medicine, 27, 5271-5290.
 
-Lin H, Zhou XH, Li G. A direct semiparametric receiver operating characteristic curve regression with unknown link and
-baseline functions. Statistica Sinica 2012; 22: 1427-1456.
+Lin H, Zhou XH, Li G (2012), "A direct semiparametric receiver operating characteristic curve regression with unknown link and
+baseline functions", Statistica Sinica, 22, 1427-1456.
 
 
 [Installation]: <https://github.com/Dingding-Hu/BPLR-package/blob/main/README.md#installation>
