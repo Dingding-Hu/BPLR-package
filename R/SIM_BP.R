@@ -290,7 +290,7 @@ estbc=function(x,y,nss=10^4)
   sy = sqrt(mean((ty-my)^2))
   ss=((1:nss)-0.5)/nss
   ROC=cbind(ss,1-pnorm(qnorm(1-ss,mx,sx),my,sy))
-  AUC=mean(ROC)
+  AUC=mean(ROC[,2])
   difpdf=function(tt)
   {
     dnorm(tt,mx,sx)-dnorm(tt,my,sy)
@@ -558,7 +558,7 @@ estemp= function(x,y,nss=10^4)
   ss=((1:nss)-0.5)/nss
 
   ROC=cbind(ss,as.numeric(sapply(ss,disroc,hatF0=estF0,hatF1=estF1)))
-  AUC=mean(ROC)
+  AUC=mean(ROC[,2])
   n=length(tt)
 
   dif = hatF0(tt)-hatF1(tt)
@@ -600,7 +600,7 @@ estlr=function(x,y,nss=10^4)
 
   ss=((1:nss)-0.5)/nss
   ROC=cbind(ss,as.numeric(sapply(ss,disroc,hatF0=estF0,hatF1=estF1)))
-  AUC=mean(ROC)
+  AUC=mean(ROC[,2])
   hatF1=cumsum(hatp1)
   hatF0=cumsum(hatp0)
 
@@ -631,9 +631,9 @@ estsinica=function(x,y,nss=10^4){
   }
   ss=((1:nss)-0.5)/nss
   roc=cbind(ss,sapply(ss,FUN = ROC))
-  AUC=mean(roc)
-  hatJ=max(roc-ss)
-  hatU=mean(ss[(roc-ss)>=hatJ])
+  AUC=mean(roc[,2])
+  hatJ=max(roc[,2]-ss)
+  hatU=mean(ss[(roc[,2]-ss)>=hatJ])
   hatF0=as.stepfun(ecdf(x))
   hatC=tt[which.min(abs(hatU+hatF0(tt)-1))]
   list(ROC=roc,AUC=AUC,Youden=hatJ,cutoff=hatC)
@@ -693,7 +693,7 @@ estsmlr=function(x,y,nss=10^4)
   estF0=(uW-outy)/(1-lam)
   ss=((1:nss)-0.5)/nss
   ROC=cbind(ss,as.numeric(sapply(ss,disroc,hatF0=estF0,hatF1=estF1)))
-  AUC=mean(ROC)
+  AUC=mean(ROC[,2])
 
   hatdif=abs(lcmfit$slope.knots-lam)
 
@@ -769,7 +769,7 @@ estkern= function(x,y,nss=10^4)
 
   ss=((1:nss)-0.5)/nss
   ROC=cbind(ss,as.numeric(sapply(ss,disroc,hatF0=estF0,hatF1=estF1)))
-  AUC=mean(ROC)
+  AUC=mean(ROC[,2])
   obj=function(tt)
   {
     kerncdf(tt,x,type="d")- kerncdf(tt,y,type="d")
