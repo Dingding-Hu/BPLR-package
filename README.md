@@ -31,7 +31,7 @@ This package contains the following functions:
 
 # Usage
 
-The function `ROC` inputs the biomarkers from the non-diseased group (`x`) and the diseased group (`y`) , and outputs a list consisting of the ROC curve, AUC, Youden index, and optimal cutoff point estimation. In the following, we provide the code for the real data application in Hu et al. (2022). The csv file of the DMD data is provided in the R folder of this package. To import the data set, one needs to download and put it in the working directory.
+The function `ROC` inputs the biomarkers from the non-diseased group (`x`) and the diseased group (`y`) , and outputs a list consisting of the ROC curve, AUC, Youden index, and optimal cutoff point estimation. In the following, we provide the code for the real data application in Hu et al. (2022). The csv file of the DMD data is provided in the R folder of this package. To import the data, one needs to download the csv file and put it in the working directory.
 
 - Example: estimating the ROC curve and its summary statistics using the proposed "BP" approach for the DMD data
 
