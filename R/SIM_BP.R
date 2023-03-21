@@ -784,3 +784,43 @@ estkern= function(x,y,nss=10^4)
 
   list(ROC=ROC,AUC=AUC,Youden=hatJ,cutoff=hatC)
 }
+
+############################ Hypothesis test for lr constraint
+
+
+lr.test=function(x,y,B=1000){
+  ut=sort(unique(c(x,y)))
+
+  # estimate the pdf for each group using empirical likelihood
+  ecdf1=estemp(x,y)
+  epdf0=diff(c(0,ecdf1$estF0))
+  epdf1=diff(c(0,ecdf1$estF1))
+  ECDF0=ecdf1$estF0
+  ECDF1=ecdf1$estF1
+
+  # estimate the pdf for each group using BP method
+  bp1=estbp(x,y)
+  bppdf0=diff(c(0,bp1$estF0))
+  bppdf1=diff(c(0,bp1$estF1))
+  bpCDF0=bp1$estF0
+  bpCDF1=bp1$estF1
+
+  # generate B bootstrap samples to calculate the p-value
+  max0=rep(0,B)
+  max1=rep(0,B)
+  for(i in 1:B){
+    s0=sample(ut,length(x),replace = TRUE,prob=bppdf0)
+    s1=sample(ut,length(y),replace = TRUE,prob=bppdf1)
+    bp.temp=estbp(s0,s1)
+    ecdf.temp=estemp(s0,s1)
+    max0.temp=max(abs(bp.temp$estF0-ecdf.temp$estF0))
+    max1.temp=max(abs(bp.temp$estF1-ecdf.temp$estF1))
+    max0[i]=max0.temp
+    max1[i]=max1.temp
+  }
+  kax0.true=max(abs(bpCDF0-ECDF0))
+  kax1.true=max(abs(bpCDF1-ECDF1))
+
+  c(mean(kax0.true<=max0),mean(kax1.true<=max1))
+}
+
